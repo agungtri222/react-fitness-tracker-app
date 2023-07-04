@@ -9,9 +9,34 @@ import Signin from "./pages/Signin";
 import AuthProvider, { useAuth } from "./contexts/auth/AuthContext";
 import { WorkoutProvider } from "./contexts/workout/WorkoutContext";
 import SigninLayout from "./layouts/SigninLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 import Singup from "./pages/Signup";
-import SignupLayout from "./layouts/SignupLayout";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import Workout from "./pages/Workout";
+
+function RouteWrapper({ layout: Layout, page: Page }) {
+  return (
+    <Layout>
+      <Page />
+    </Layout>
+  );
+}
+
+function PrivateRoute({ layout: Layout, page: Page }) {
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
+
+  return (
+    <Layout>
+      <Page />
+    </Layout>
+  );
+}
 
 function router() {
   return (
@@ -25,40 +50,27 @@ function router() {
             />
             <Route
               path="/sign-up"
-              element={<RouteWrapper layout={SignupLayout} page={Singup} />}
+              element={<RouteWrapper layout={SigninLayout} page={Singup} />}
             />
-            {/* <PrivateRoute path="/" layout={DashboardLayout}>
-              <Dashboard />
-            </PrivateRoute>
-            <PrivateRoute path="/workout" layout={DashboardLayout}>
-              <Workout />
-            </PrivateRoute>
-            <PrivateRoute path="/profile" layout={DashboardLayout}>
-              <Profile />
-            </PrivateRoute> */}
+            <Route
+              path="/"
+              element={
+                <PrivateRoute layout={DashboardLayout} page={Dashboard} />
+              }
+            />
+            <Route
+              path="/profile"
+              element={<PrivateRoute layout={DashboardLayout} page={Profile} />}
+            />
+            <Route
+              path="/workout"
+              element={<PrivateRoute layout={DashboardLayout} page={Workout} />}
+            />
           </Routes>
         </WorkoutProvider>
       </AuthProvider>
     </Router>
   );
-}
-
-function RouteWrapper({ layout: Layout, page: Page }) {
-  return (
-    <Layout>
-      <Page />
-    </Layout>
-  );
-}
-
-function PrivateRoute({ path, layout: Layout, children }) {
-  const { user } = useAuth();
-
-  if (!user) {
-    return <Navigate to="/sign-in" />;
-  }
-
-  return <Route path={path} element={<Layout>{children}</Layout>} />;
 }
 
 export default router;
