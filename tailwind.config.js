@@ -12,8 +12,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        "signin-image":
-          "url('https://source.unsplash.com/FMQBLyhD2HU/1600x900')",
+        "signin-image": "url('/public/background.jpg')",
       }),
       colors: {
         primary: "#86198f",

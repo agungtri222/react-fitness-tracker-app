@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, collection, serverTimestamp } from "firebase/firestore";
-import "firebase/firestore";
+import { getFirestore, serverTimestamp, collection } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -13,7 +12,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-let app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const db = new getFirestore(app);
 
@@ -30,3 +29,5 @@ export const googleProvider = new GoogleAuthProvider();
 export const emailProvider = new EmailAuthProvider();
 
 export default app;
+
+export { db };
