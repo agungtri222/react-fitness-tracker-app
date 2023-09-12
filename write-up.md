@@ -1,7 +1,7 @@
 ## Fitness Tracker App
 
-This App is actually to manage my calories and workout for every morning. because I was sat in front of my laptop for almost 10 hours a day
-and never have a time to workout, So I was decided to make this app for myself :) hope this will usefull for you also.
+This App is actually to manage my calories and workout for every morning. because I sat in front of my laptop for almost 10 hours a day
+and never had time to workout, So I decided to make this app for myself :) hope this will useful for you also.
 
 ![Alt text](/screenshots/dashboard.png "a title")
 
